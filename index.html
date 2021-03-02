@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyASsaAwhtCRtT15GCkT7gUDx9oAfzcog5s",
+    authDomain: "todo-f7355.firebaseapp.com",
+    projectId: "todo-f7355",
+    storageBucket: "todo-f7355.appspot.com",
+    messagingSenderId: "11665204002",
+    appId: "1:11665204002:web:00f27417f4b9eb3a227b7b",
+    measurementId: "G-NGM5DE2SQW"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="img">
+            <img src="data:image/png;base64,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" alt="" width="60px">
+        </div>
+        <div class="h2">
+            
+            <div><h2>To Do App</h2></div>
+        </div>
+    </nav>
+    <div class="parent">
+        <div class="main">
+            <input type="text" id="input" class="input" placeholder="What Do You Want To Do">
+           <button onclick="Send()" class="buttonadd">Add</button>
+             <button onclick="del_all()" class="buttonadd">Clear</button>
+        </div>
+    </div>
+    <div>
+        <ul id="ul" class="ul">
+
+        </ul>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
